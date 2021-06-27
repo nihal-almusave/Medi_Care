@@ -13,6 +13,7 @@ bool loadmedia()
     gTexture=loadedTexture("photos/mesage.JPG");
     return success;
 }
+//sfsfsfsfs
 
 int main(int argc,char* args[])
 {
