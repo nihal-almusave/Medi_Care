@@ -21,7 +21,7 @@ SDL_Rect Text_Rect;
 SDL_Rect Input_Rect;
 string input_symptoms;
 
-int CurrentIndex =0;
+int CurrentIndex =1;
 int f=0;
 //for showing information
 
@@ -39,7 +39,7 @@ SDL_Rect Doctor_date_text_Rect;
 
 SDL_Surface* Hospital_name_text_Surface;
 SDL_Texture* Hospital_name_text_Texture;
-SDL_Rect Specality_name_text_Rect;
+SDL_Rect Hospital_name_text_Rect;
 
 SDL_Surface* phone_number_text_Surface;
 SDL_Texture* phone_number_text_Texture;
@@ -61,7 +61,7 @@ SDL_Rect Doctor_date_Show_Rect;
 
 SDL_Surface* Hospital_name_Show_Surface;
 SDL_Texture* Hospital_name_Show_Texture;
-SDL_Rect Specality_name_Show_Rect;
+SDL_Rect Hospital_name_Show_Rect;
 
 SDL_Surface* phone_number_text_show_Surface;
 SDL_Texture* phone_number_text_show_Texture;
@@ -75,6 +75,12 @@ void clR()
 {
     Specality_text_Texture=NULL;
     Specality_Show_Texture=NULL;
+
+    Doctor_name_text_Texture=NULL;
+    Doctor_name_Show_Texture=NULL;
+
+    Doctor_date_text_Texture=NULL;
+    Doctor_date_Show_Texture=NULL;
 }
 
 int  Symptoms()
@@ -90,7 +96,7 @@ SDL_Color color_Symptoms ={0,0,0};
 
 bool symptoms_Rend_Background()
 {
-    gTexture=loadedTexture("symptoms_input.jpg");
+    gTexture=loadedTexture("photos/symptoms_input.jpg");
     font=TTF_OpenFont("arial.ttf",45);
     Text_Surface=TTF_RenderText_Solid(font,"TYPE HERE YOUR MATCHED SYMPTOMS:",color_Symptoms);
     Text_texture=SDL_CreateTextureFromSurface(gRenderer,Text_Surface);
@@ -150,14 +156,16 @@ bool input_Symptoms()
 
 }
 
+Doctor results[100];
+ int maxIndex;
 int Show_information()
 {
+    gTexture=loadedTexture("photos/show_information.jpg");
     int arr[5];
     for (int c=0;c<5;c++)
     {
         arr[c]=0;
     }
-    input_symptoms="02040611192430";
     if(strstr(input_symptoms.c_str(),"01")||strstr(input_symptoms.c_str(),"02")||strstr(input_symptoms.c_str(),"03")||strstr(input_symptoms.c_str(),"04")||strstr(input_symptoms.c_str(),"05"))
     {
         arr[0]=1;
@@ -183,46 +191,19 @@ int Show_information()
         arr[4]=1;
     }
 
-    // if (input_symptoms.find("01")!=std::string::npos||input_symptoms.find("02")!=std::string::npos||input_symptoms.find("03")!=std::string::npos||input_symptoms.find("04")!=std::string::npos||input_symptoms.find("05")!=std::string::npos)
-    // {
-    //     arr[0]=1;
-    // }
-    // else if (input_symptoms.find("06")!=std::string::npos||input_symptoms.find("07")!=std::string::npos||input_symptoms.find("08")!=std::string::npos||input_symptoms.find("09")!=std::string::npos||input_symptoms.find("10")!=std::string::npos)
-    // {
-    //     arr[1]=1;
-    // }
-    // else if (input_symptoms.find("11")!=std::string::npos||input_symptoms.find("12")!=std::string::npos||input_symptoms.find("13")!=std::string::npos||input_symptoms.find("14")!=std::string::npos||input_symptoms.find("15")!=std::string::npos||input_symptoms.find("16")!=std::string::npos||input_symptoms.find("17")!=std::string::npos||input_symptoms.find("18")!=std::string::npos)
-    // {
-    //     arr[2]=1;
-    // }
-    // else if (input_symptoms.find("19")!=std::string::npos||input_symptoms.find("20")!=std::string::npos||input_symptoms.find("21")!=std::string::npos||input_symptoms.find("22")!=std::string::npos||input_symptoms.find("23")!=std::string::npos)
-    // {
-    //     arr[0]=1;
-    // }
-    // else if (input_symptoms.find("24")!=std::string::npos||input_symptoms.find("25")!=std::string::npos||input_symptoms.find("26")!=std::string::npos||input_symptoms.find("27")!=std::string::npos||input_symptoms.find("28")!=std::string::npos||input_symptoms.find("29")!=std::string::npos)
-    // {
-    //     arr[3]=1;
-    // }
-    // else if (input_symptoms.find("30")!=std::string::npos||input_symptoms.find("31")!=std::string::npos||input_symptoms.find("32")!=std::string::npos||input_symptoms.find("33")!=std::string::npos||input_symptoms.find("34")!=std::string::npos||input_symptoms.find("35")!=std::string::npos||input_symptoms.find("36")!=std::string::npos||input_symptoms.find("37")!=std::string::npos)
-    // {
-    //     arr[4]=1;
-    // }
+   
+    
+    string name_a[50];
+    string specality_a[50];
+    string hospital_a[50];
+    string chamber_a[50];
+    string phone_a[50];
 
-    // for (int i=0;i<5;i++)
-    // {
-    //     printf ("%d\n",arr[i]);
-    // }
-
-    int maxIndex;
-    //Doctor results[10];
-Doctor* results;
     if (f==0)
     {
-        results=search(arr,&maxIndex);
+        search(arr,&maxIndex,results);
         f++;
     }
-    
-    printf("%d",maxIndex);
     string medium_Specality;
     string medium_doctor;
     string medium_chamber;
@@ -235,49 +216,134 @@ Doctor* results;
         if (event.key.keysym.sym==SDLK_RIGHT&&CurrentIndex<maxIndex-1)
         {
             CurrentIndex++;
+            printf("Current: %d\n",CurrentIndex);
             clR();
         }
-        else if (event.key.keysym.sym==SDLK_LEFT&&CurrentIndex>0)
+        else if (event.key.keysym.sym==SDLK_LEFT&&CurrentIndex>1)
         {
             CurrentIndex--;
+            printf("Current1: %d\n",CurrentIndex);
             clR();
         }
-        else if (event.key.keysym.sym==SDLK_RIGHT&&CurrentIndex==maxIndex-1)
+        else if (event.key.keysym.sym==SDLK_RIGHT&&CurrentIndex==maxIndex)
         {
             CurrentIndex=CurrentIndex;
+            printf("Current2: %d\n",CurrentIndex);
             clR();
         }
-        else if (event.key.keysym.sym==SDLK_LEFT&&CurrentIndex==0)
+        else if (event.key.keysym.sym==SDLK_LEFT&&CurrentIndex==1)
         {
             CurrentIndex=CurrentIndex;
+            printf("Current3: %d\n",CurrentIndex);
             clR();
         }
     }
 
+    // for (int d=0;d<maxIndex;d++)
+    // {
+    //     printf("Specality:%s\n",specality_a[d].c_str());
+    //     printf("Name: %s\n",name_a[d].c_str());
+    //     printf("phone: %s\n",phone_a[d].c_str());
+    //     printf("hospital: %s\n",chamber_a[d].c_str());
+    //     printf("Chamber: %s\n",hospital_a[d].c_str());
+    // }
+    
     medium_chamber=results[CurrentIndex].cname;
     medium_Specality=results[CurrentIndex].special;
     medium_doctor=results[CurrentIndex].name;
     medium_hospital=results[CurrentIndex].hname;
     medium_phone_number=results[CurrentIndex].phone;
 
-    color={255,255,255};
+    // cout<<results[1].special;
+
+    for (int d=0;d<maxIndex;d++)
+    {
+        
+        printf("Name: %s\n",results[d].name);
+        
+    }
+
+    color={0,0,0};
 
 
 
     Specality_text_Surface=TTF_RenderText_Solid(font,"Specality: ",color);
     Specality_text_Texture=SDL_CreateTextureFromSurface(gRenderer,Specality_text_Surface);
 
-    Specality_text_rect.x=50;
+    Specality_text_rect.x=20;
     Specality_text_rect.y=100;
     Specality_text_rect.w=Specality_text_Surface->w;
     Specality_text_rect.h=Specality_text_Surface->h;
 
     Specality_Show_Surface=TTF_RenderText_Blended_Wrapped(font,medium_Specality.c_str(),color,900);
     Specality_Show_Texture=SDL_CreateTextureFromSurface(gRenderer,Specality_Show_Surface);
-    Specality_Show_Rect.x=200;
+    Specality_Show_Rect.x=220;
     Specality_Show_Rect.y=100;
     Specality_Show_Rect.w=Specality_Show_Surface->w;
     Specality_Show_Rect.h=Specality_Show_Surface->h;
 
+    Doctor_name_text_Surface=TTF_RenderText_Solid(font,"Doctor's name: ",color);
+    Doctor_name_text_Texture=SDL_CreateTextureFromSurface(gRenderer,Doctor_name_text_Surface);
+    Doctor_name_text_Rect.x=20;
+    Doctor_name_text_Rect.y=200;
+    Doctor_name_text_Rect.w=Doctor_name_text_Surface->w;
+    Doctor_name_text_Rect.h=Doctor_name_text_Surface->h;
+
+    Doctor_name_Show_Surface=TTF_RenderText_Blended_Wrapped(font,medium_doctor.c_str(),color,900);
+    Doctor_name_Show_Texture=SDL_CreateTextureFromSurface(gRenderer,Doctor_name_Show_Surface);
+    Doctor_name_Show_Rect.x=320;
+    Doctor_name_Show_Rect.y=200;
+    Doctor_name_Show_Rect.w=Doctor_name_Show_Surface->w;
+    Doctor_name_Show_Rect.h=Doctor_name_Show_Surface->h;
+
+    Doctor_date_text_Surface=TTF_RenderText_Solid(font,"Chamber: ",color);
+    Doctor_date_text_Texture=SDL_CreateTextureFromSurface(gRenderer,Doctor_date_text_Surface);
+    Doctor_date_text_Rect.x=20;
+    Doctor_date_text_Rect.y=300;
+    Doctor_date_text_Rect.w=Doctor_date_text_Surface->w;
+    Doctor_date_text_Rect.h=Doctor_date_text_Surface->h;
+
+    Doctor_date_Show_Surface=TTF_RenderText_Blended_Wrapped(font,medium_chamber.c_str(),color,900);
+    Doctor_date_Show_Texture=SDL_CreateTextureFromSurface(gRenderer,Doctor_date_Show_Surface);
+    Doctor_date_Show_Rect.x=220;
+    Doctor_date_Show_Rect.y=300;
+    Doctor_date_Show_Rect.w=Doctor_date_Show_Surface->w;
+    Doctor_date_Show_Rect.h=Doctor_date_Show_Surface->h;
+
+    Hospital_name_text_Surface=TTF_RenderText_Solid(font,"Hospital: ",color);
+    Hospital_name_text_Texture=SDL_CreateTextureFromSurface(gRenderer,Hospital_name_text_Surface);
+    Hospital_name_text_Rect.x=20;
+    Hospital_name_text_Rect.y=400;
+    Hospital_name_text_Rect.w=Hospital_name_text_Surface->w;
+    Hospital_name_text_Rect.h=Hospital_name_text_Surface->h;
+
+    Hospital_name_Show_Surface=TTF_RenderText_Blended_Wrapped(font,medium_hospital.c_str(),color,900);
+    Hospital_name_Show_Texture=SDL_CreateTextureFromSurface(gRenderer,Hospital_name_Show_Surface);
+    Hospital_name_Show_Rect.x=230;
+    Hospital_name_Show_Rect.y=400;
+    Hospital_name_Show_Rect.w=Hospital_name_Show_Surface->w;
+    Hospital_name_Show_Rect.h=Hospital_name_Show_Surface->h;
+
+    phone_number_text_Surface=TTF_RenderText_Solid(font,"Phone: ",color);
+    phone_number_text_Texture=SDL_CreateTextureFromSurface(gRenderer,phone_number_text_Surface);
+    phone_number_text_rect.x=20;
+    phone_number_text_rect.y=500;
+    phone_number_text_rect.w=phone_number_text_Surface->w;
+    phone_number_text_rect.h=phone_number_text_Surface->h;
+
+    phone_number_text_show_Surface=TTF_RenderText_Blended_Wrapped(font,medium_phone_number.c_str(),color,900);
+    phone_number_text_show_Texture=SDL_CreateTextureFromSurface(gRenderer,phone_number_text_show_Surface);
+    phone_number_text_show_rect.x=210;
+    phone_number_text_show_rect.y=500;
+    phone_number_text_show_rect.w=phone_number_text_show_Surface->w;
+    phone_number_text_show_rect.h=phone_number_text_show_Surface->h;
+
+    
     return 0;
+}
+
+
+void NO_Record_Found()
+{
+    gTexture=loadedTexture("photos/No Record Found.jpg");
 }

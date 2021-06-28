@@ -1,3 +1,0 @@
-    Name                    time             days           degree          Hospital
-1. Md. Farah Hossain     3p.m.-9p.m.    Sat,Sun,Tues       MBBS,FRCPS   sadar Hospital
-1. Md. Farah Hossain     3p.m.-9p.m.    Sat,Sun,Tues       MBBS,FRCPS   sadar Hospital

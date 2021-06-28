@@ -56,3 +56,10 @@ bool message_function()
     return true;
 
 }
+
+bool Help_CLICK()
+{
+    gTexture=loadedTexture("photos/Prevention Help.jpg");
+
+    return true;
+}

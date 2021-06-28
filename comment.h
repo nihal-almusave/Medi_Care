@@ -23,7 +23,7 @@ SDL_Color Color={0,0,0};
 bool CMNT_BACKGROUND()
 {
     bool success=true;
-    gTexture=loadedTexture("cmnt.jpg");
+    gTexture=loadedTexture("photos/cmnt.jpg");
     font = TTF_OpenFont("arial.ttf",45);
     cmnt_text_Surface=TTF_RenderText_Solid(font,"Give us your valuable opinion",Color);
     cmnt_text_texture=SDL_CreateTextureFromSurface(gRenderer,cmnt_text_Surface);
@@ -82,7 +82,7 @@ bool CMNT()
 bool CMNT_RETURN()
 {
     //cmnt="";
-    gTexture=loadedTexture("CMNT_Return.jpg");
+    gTexture=loadedTexture("photos/CMNT_Return.jpg");
 
     return true;
 }
