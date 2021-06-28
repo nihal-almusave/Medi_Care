@@ -118,7 +118,7 @@ void noofrec() {
 
 // fclose(fp);
 // }
-Doctor* search(int flags[5],int *count)
+Doctor* search(int flags[5],int *count,Doctor results[])//string name_a[],string specality_a[],string hospital_a[],string chamber_a[],string phone_a[])
 {//{0,1,.}&variable name,
  static Doctor *result;
  Doctor temp;
@@ -134,18 +134,50 @@ Doctor* search(int flags[5],int *count)
      
     for(j = 0; j < 5; j++)
     {
+        //printf ("%s \n",temp.special);//s_name[j]);
     if(flags[j] == 1)
     {
+
         if(!strcmp(temp.special, s_name[j]))
         { 
-            result[i] = temp;
+        //     printf("Specality:%s\n",temp.special);
+        // printf("Name: %s\n",temp.name);
+        // printf("phone: %s\n",temp.phone);
+        // printf("hospital: %s\n",temp.hname);
+        // printf("Chamber: %s\n",temp.cname);
+        // name_a[i]=temp.name;
+        // hospital_a[i]=temp.hname;
+        // specality_a[i]=temp.special;
+        // chamber_a[i]=temp.cname;
+        // phone_a[i]=temp.phone;
+            strcpy(results[i].name,temp.name);
+            strcpy(results[i].hname,temp.hname);
+            strcpy(results[i].cname,temp.cname);
+            strcpy(results[i].phone,temp.phone);
+            strcpy(results[i].special,temp.special);
+            //printf("%s\n",temp.special);
+            
             i++;
+            // printf("%d\n",i);
         }
+        // printf("%s\n",temp.special);
+            //printf("%s\n",temp.name);
+        
     }
 
         // printf("%d",flags[j]);
     }
+
  }
+ //printf("%d\n",i);
+//  for (int d=0;d<i;d++)
+//     {
+//         printf("Specality:%s\n",result[d].special);
+//         printf("Name: %s\n",result[d].name);
+//         printf("phone: %s\n",result[d].phone);
+//         printf("hospital: %s\n",result[d].hname);
+//         printf("Chamber: %s\n",result[d].cname);
+//     }
 *count = i;
 // printf ("%d",i);
  return result;

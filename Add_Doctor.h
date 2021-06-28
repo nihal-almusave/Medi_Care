@@ -96,7 +96,7 @@ int add_phone_number_function();
 
 int Specality_Function()
 {
-    gTexture=loadedTexture("photos/Add_a_doctor.png");
+    gTexture=loadedTexture("photos/Add_a_doctor.jpg");
 
     font = TTF_OpenFont("arial.ttf",45);
 
@@ -388,3 +388,18 @@ int add_a_doctor_Next()
     return 0;
 }
 
+bool strings_clear()
+{
+    Specality="";
+    Hospital="";
+    doctor="";
+    Doctor_time="";
+    phone_number="";
+
+    return true;
+}
+
+void ambulance_help()
+{
+    gTexture=loadedTexture("photos/help Button page.jpg");
+}

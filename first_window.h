@@ -9,7 +9,7 @@ int first_window()
 {
     int success=0;
     //Load Image texture
-    gTexture =loadedTexture("photos/Window for Medi care.jpg");
+    gTexture =loadedTexture("Window for Medi care (2).jpg");
 
     return success;
 

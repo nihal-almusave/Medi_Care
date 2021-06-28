@@ -15,10 +15,10 @@ using namespace std;
 #include"second_window.h"
 #include"comment.h"
 #include"prevention.h"
-#include"ambulance.h"
 #include"Admin_panel.h"
 #include"Add_Doctor.h"
 #include"message.h"
+#include"AMBULANCE.h"
 
 //int menu=0;
 
@@ -34,6 +34,59 @@ void clear()
     password_Texture=NULL;
 
     message_texture=NULL;
+
+    Specality_Texture=NULL;
+    Specality_add_Texture=NULL;
+
+    Doctor_add_Texture=NULL;
+    Doctor_Texture=NULL;
+
+    Hospital_Texture=NULL;
+    Hospital_add_Texture=NULL;
+
+    Doctor_time_Texture=NULL;
+    Doctor_time_add_Texture=NULL;
+
+    phone_number_Texture=NULL;
+    phone_number_add_Texture=NULL;
+
+    Specality_text_Texture=NULL;
+    Specality_Show_Texture=NULL;
+
+    Doctor_date_text_Texture=NULL;
+    Doctor_date_Show_Texture=NULL;
+
+    Doctor_name_text_Texture=NULL;
+    Doctor_name_Show_Texture=NULL;
+
+    Hospital_name_text_Texture=NULL;
+    Hospital_name_Show_Texture=NULL;
+
+    phone_number_text_Texture=NULL;
+    phone_number_text_show_Texture=NULL;
+
+    Division_Texture=NULL;
+    Division_text_Texture=NULL;
+
+    amb_phone_text_Texture=NULL;
+    amb_phone_Texture=NULL;
+
+    amb_name_Texture=NULL;
+    amb_name_text_Texture=NULL;
+
+    Division_input_texture=NULL;
+    Division_input_text_texture=NULL;
+
+    Division_show_Texture=NULL;
+    Division_show_text_Texture=NULL;
+
+    amb_name_show_Texture=NULL;
+    amb_name_show_text_Texture=NULL;
+
+    amb_phone_show_Texture=NULL;
+    amb_phone_show_text_Texture=NULL;
+
+
 }
 
 int main(int argc,char* args[])
@@ -41,12 +94,13 @@ int main(int argc,char* args[])
     init();
 
     admin_or_user_function();
-    menu=20;
+    int menu=20;
     int i=0,j=0,m=0;
 
     int mousex,mousey;
 
     bool quit=true;
+    
 
     while(quit)
     {
@@ -56,10 +110,9 @@ int main(int argc,char* args[])
             {
                 quit=false;
             }
-
+            //admin_or_user_function();
             else if (event.type==SDL_MOUSEBUTTONDOWN||event.type==SDL_TEXTINPUT||event.type==SDL_KEYDOWN)
             {
-                SDL_GetMouseState(&mousex,&mousey);
                 if (menu==20)
                 {
                     admin_or_user_function();
@@ -69,78 +122,15 @@ int main(int argc,char* args[])
                         first_window();
                         break;
                     }
-                    // else if (event.motion.x>=845&&event.motion.x<=1135&&event.motion.y>=439&&event.motion.y<=543)
-                    // {
-                    //     menu=18;
-                    //     if (j==0)
-                    //         {
-                    //             j=login_username();
-                    //         }
-                        
-                    //         else if (j==1)
-                    //         {
-                    //             j=login_password();
-                    //         }
-
-                    //         if (event.motion.x>=597&&event.motion.x<=846&&event.motion.y>=749&&event.motion.y<=847)
-                    //         {
-                    //             if (username=="Admin1"&&password=="medi_care")
-                    //             {
-                    //                 menu=19;
-                    //                 username="";
-                    //                 password="";
-                    //                 clear();
-                    //                 admin_main_menu();
-                    //             }
-                    //             else 
-                    //             {
-                    //                 menu=23;
-                    //                 username="";
-                    //                 password="";
-                    //                 clear();
-                    //                 wrong();
-                    //                 break;
-                    //             }
-                    //     }
-                    // }
                     else if (event.motion.x>=845&&event.motion.x<=1135&&event.motion.y>=439&&event.motion.y<=543)
                     {
-                        printf("d:1");
                         menu=18;
+                        j=0;
                         if (j==0)
                         {
                             j=login_username();
                         }
-                       
-                        else if (j==1)
-                        {
-                            login_password();
-                        }
-                        if (event.motion.x>=597&&event.motion.x<=846&&event.motion.y>=749&&event.motion.y<=847)
-                        {
-                            j=0;
-                            if (username=="Admin1"&&password=="medi_care")
-                            {
-                                menu=19;
-                                j=0;
-                                username="";
-                                password="";
-                                clear();
-                                admin_main_menu();
-                                
-                                break;
-                            }
-                            else 
-                            {
-                                menu=23;
-                                username="";
-                                password="";
-                                j=0;
-                                clear();
-                                wrong();
-                                break;
-                            }
-                        }
+                        break;
                         
                     }
                 }
@@ -161,13 +151,14 @@ int main(int argc,char* args[])
                         else if (event.motion.y>=253&&event.motion.y<=354)
                         {
                             menu=5;
-                            ambulace_front();
+                            enter_division_input();
                             break;
                         }
                         else if (event.motion.y>=385&&event.motion.y<=486)
                         {
                             //Prevention of Diseases
                             menu=7;
+                            i=0;
                             prevention_page1(i);
                             break;
                         }
@@ -186,6 +177,18 @@ int main(int argc,char* args[])
                             About_Guide();
                             break;
                         }
+                    }
+                    else if (event.motion.x>=1241 && event.motion.x<=1437 && event.motion.y>=921 && event.motion.y<=973)
+                    {
+                        menu=18;
+                        username="";
+                        password="";
+                        j=0;
+                        if (j==0)
+                        {
+                            j=login_username();
+                        }
+                        break;
                     }
                 }
                 else if (menu==1)
@@ -227,20 +230,32 @@ int main(int argc,char* args[])
                 {
                     symptoms_Rend_Background();
                     input_Symptoms();
-                    if(event.motion.x>=763&&event.motion.x<=864&&event.motion.y>=823&&event.motion.y<=863) 
+                    if(event.motion.x>=665&&event.motion.x<=768&&event.motion.y>=924&&event.motion.y<=961) 
                     {
-                        clear();
-                        f=0;
-                        
-                        menu=4;
-                        Show_information();
-
+                        if (strstr(input_symptoms.c_str(),"01")||strstr(input_symptoms.c_str(),"02")||strstr(input_symptoms.c_str(),"03")||strstr(input_symptoms.c_str(),"04")||strstr(input_symptoms.c_str(),"05")||strstr(input_symptoms.c_str(),"06")||strstr(input_symptoms.c_str(),"07")||strstr(input_symptoms.c_str(),"08")||strstr(input_symptoms.c_str(),"09")||strstr(input_symptoms.c_str(),"10")||strstr(input_symptoms.c_str(),"11")||strstr(input_symptoms.c_str(),"12")||strstr(input_symptoms.c_str(),"13")||strstr(input_symptoms.c_str(),"14")||strstr(input_symptoms.c_str(),"15")||strstr(input_symptoms.c_str(),"16")||strstr(input_symptoms.c_str(),"17")||strstr(input_symptoms.c_str(),"18")||strstr(input_symptoms.c_str(),"19")||strstr(input_symptoms.c_str(),"20")||strstr(input_symptoms.c_str(),"21")||strstr(input_symptoms.c_str(),"22")||strstr(input_symptoms.c_str(),"23")||strstr(input_symptoms.c_str(),"24")||strstr(input_symptoms.c_str(),"25")||strstr(input_symptoms.c_str(),"26")||strstr(input_symptoms.c_str(),"27")||strstr(input_symptoms.c_str(),"28")||strstr(input_symptoms.c_str(),"29")||strstr(input_symptoms.c_str(),"30")||strstr(input_symptoms.c_str(),"31")||strstr(input_symptoms.c_str(),"32")||strstr(input_symptoms.c_str(),"33")||strstr(input_symptoms.c_str(),"34")||strstr(input_symptoms.c_str(),"35")||strstr(input_symptoms.c_str(),"36")||strstr(input_symptoms.c_str(),"37"))
+                        {
+                            clear();
+                            f=0;
+                            menu=4;
+                            Show_information();
+                        }
+                        else 
+                        {
+                            menu=12;
+                            clear();
+                            input_symptoms="";
+                            NO_Record_Found();
+                            break;
+                        }
                     }
                     
                     else if (event.motion.x>=1306&&event.motion.x<=1419&&event.motion.y>=915&&event.motion.y<=968)
                     {
                         clear();
                         menu=1;
+                        input_symptoms="";
+                        CurrentIndex=1;
+                        aa=0;
                         Symptoms();
                     }
                 }
@@ -249,29 +264,101 @@ int main(int argc,char* args[])
 
                 else if (menu==4)
                 {
-
-                }
-
-                else if (menu==5)
-                {
-                    menu=ambulace_front();
-                    if (event.motion.x>=1287 && event.motion.x<=1424 && event.motion.y>=915 && event.motion.y<=968&&menu==5)
+                    Show_information();
+                    if (event.motion.x>=1240 && event.motion.x<=1421 && event.motion.y>=905 && event.motion.y<=960)
                     {
                         menu=0;
+                        clear();
+                        CurrentIndex=1;
+                        aa=0;
+                        input_symptoms="";
                         first_window();
+                        break;
                     }
                 }
+
+                //Ambulance Start
+                else if (menu==5)
+                {
+                    enter_division_input();
+                    if (event.motion.x>=654 && event.motion.x<=917 && event.motion.y>=886 && event.motion.y<=944)
+                    {
+                        if (strstr(Division.c_str(),"Dhaka")||strstr(Division.c_str(),"dhaka")||strstr(Division.c_str(),"DHAKA")||strstr(Division.c_str(),"Rajshahi")||strstr(Division.c_str(),"rajshahi")||strstr(Division.c_str(),"RAJSHAHI")||strstr(Division.c_str(),"Rangpur")||strstr(Division.c_str(),"rangpur")||strstr(Division.c_str(),"RANGPUR")||strstr(Division.c_str(),"Chattogram")||strstr(Division.c_str(),"chattogram")||strstr(Division.c_str(),"CHATTOGRAM")||strstr(Division.c_str(),"Sylhet")||strstr(Division.c_str(),"sylhet")||strstr(Division.c_str(),"SYLHET")||strstr(Division.c_str(),"Mymensingh")||strstr(Division.c_str(),"mymensingh")||strstr(Division.c_str(),"MYMENSINGH")||strstr(Division.c_str(),"Khulna")||strstr(Division.c_str(),"khulna")||strstr(Division.c_str(),"kHULNA")||strstr(Division.c_str(),"Barishal")||strstr(Division.c_str(),"barishal")||strstr(Division.c_str(),"BARISHAL"))
+                        {
+                            menu=6;
+                            clear();
+                            Ambulance_show();
+                        }
+
+                        else 
+                        {
+                            menu=12;
+                            clear();
+                            Division="";
+                            NO_Record_Found();
+                            break;
+                        }
+
+                    }
+                    else if (event.motion.x>=52 && event.motion.x<=197 && event.motion.y>=886 && event.motion.y<=944)
+                    {
+
+                        menu=14;
+                        clear();
+                        Division="";
+                        ambulance_help();
+                        break;
+                    }
+                    else if (event.motion.x>=1244 && event.motion.x<=1389 && event.motion.y>=886 && event.motion.y<=944)
+                    {
+                        menu=0;
+                        clear();
+                        Division="";
+                        first_window();
+                        break;
+                    }
+                    
+                    
+                }
+                //Ambulance End
+
+                else if (menu==14)
+                {
+                    ambulance_help();
+                    if (event.motion.x>=1125 && event.motion.x<=1325 && event.motion.y>=861 && event.motion.y<=943)
+                    {
+                        menu=5;
+                        enter_division_input();
+                        break;
+                    }
+                }
+                //ambulance Data show start
                 else if (menu==6)
                 {
-                    menu=ambulance_Dhaka();
+                    Ambulance_show();
+                    if (event.motion.x>=1244 && event.motion.x<=1389 && event.motion.y>=886 && event.motion.y<=944)
+                    {
+                        menu=0;
+                        Division="";
+                        bb=0;
+                        current=0;
+                        first_window();
+                        clear();
+
+                    }
                 }
-                
+                //Ambulance Data show end
+
+                //prevention Start
+
                 else if (menu==7)
                 {
                     prevention_page1(i);
                     if (i==0&&event.motion.x>=5&&event.motion.x<=173&&event.motion.y>=913&&event.motion.y<=968)
                     {
-                        menu=10;
+                        menu=30;
+                        Help_CLICK();
+                        break;
                         
                     }
                     else if (i==0&&event.motion.x>=1268&&event.motion.x<=1437&&event.motion.y>=913&&event.motion.y<=968)
@@ -279,42 +366,49 @@ int main(int argc,char* args[])
                         menu=0;
                         i=0;
                         first_window();
+                        break;
                     }
                     else if (i==1&&event.motion.x>=1268&&event.motion.x<=1437&&event.motion.y>=913&&event.motion.y<=968)
                     {
                        menu=0;
                        i=0;
                        first_window();
+                       break;
                     }
                     else if (i==2&&event.motion.x>=1268&&event.motion.x<=1437&&event.motion.y>=913&&event.motion.y<=968)
                     {
                         menu=0;
                         i=0;
                         first_window();
+                        break;
                     }
                     else if (i==3&&event.motion.x>=1268&&event.motion.x<=1437&&event.motion.y>=913&&event.motion.y<=968)
                     {
                         menu=0;
                         i=0;
                         first_window();
+                        break;
                     }
                     else if (i==4&&event.motion.x>=1268&&event.motion.x<=1437&&event.motion.y>=913&&event.motion.y<=968)
                     {
                         menu=0;
                         i=0;
                         first_window();
+                        break;
                     }
                     else if (i==5&&event.motion.x>=1268&&event.motion.x<=1437&&event.motion.y>=913&&event.motion.y<=968)
                     {
                         menu=0;
                         i=0;
                         first_window();
+                        break;
                     }
                     if(event.key.keysym.sym==SDLK_RIGHT&&i>=0&&i<5)
                     {
                         i=i+1;
                         menu=7;
                         prevention_page1(i);
+                        break;
                         
                     }
                     else if (event.key.keysym.sym==SDLK_RIGHT&&i>=5)
@@ -323,6 +417,7 @@ int main(int argc,char* args[])
                         i=i;
                         menu=7;
                         prevention_page1(i);
+                        break;
                     }
                     else if (event.key.keysym.sym==SDLK_LEFT&&i>0&&i<=5)
                     {
@@ -330,28 +425,34 @@ int main(int argc,char* args[])
                         i=i-1;
                         menu=7;
                         prevention_page1(i);
+                        break;
                     }
-                    else if (event.key.keysym.sym==SDLK_RIGHT&&i<=0)
+                    else if (event.key.keysym.sym==SDLK_LEFT&&i<=0)
                     {
                         
                         i=i;
                         menu=7;
                         prevention_page1(i);
+                        break;
                     }
                     
                 }
+                //prevention end
+
+
+                //comment start
                 else if (menu==8)
                 {
                     CMNT_BACKGROUND();
                     CMNT();
                     string store;
-                    if (mousex>=598&&mousex<=723&&mousey>=929&&mousey<=967)  
+                    if (event.motion.x>=598 &&event.motion.x<=723&&event.motion.y>=929&&event.motion.y<=967)  
                     {
                         clear();
                         store=cmnt;
                         cmnt="";
                         FILE *file_of_message;
-                        file_of_message=fopen("message.txt","a");
+                        file_of_message=fopen("message.txt","w");
 
                         const char *Medium=store.c_str();
                         fputs(Medium,file_of_message);
@@ -360,11 +461,20 @@ int main(int argc,char* args[])
                         menu=9;
                         CMNT_RETURN();
                     }
+
+                    else if (event.motion.x>=1284 && event.motion.x<=1415 && event.motion.y>=924 && event.motion.y<=970 )
+                    {
+                        
+                        cmnt="";
+                        clear();
+                        menu=0;
+                        first_window();
+                    }
                 }
                 else if (menu==9)
                 {
                     CMNT_RETURN();
-                    if (mousex>=1269&&mousex<=1410&&mousey>=923&&mousey<=949)
+                    if (event.motion.x>=1269&&event.motion.x<=1410&&event.motion.y>=923&&event.motion.y<=949)
                     {
                        clear();
                        menu=0;
@@ -375,47 +485,36 @@ int main(int argc,char* args[])
                     } 
                 }
 
-                //menu=10------
+                //comment end
 
+
+                //menu=10------
+                //overall apps
                 else if (menu==10)
                 {
                     About_Guide();
-                    if (event.motion.x>=698 && event.motion.x<=834&&event.motion.y>=831&&event.motion.y<=898)
+                    if (event.motion.x>=602 && event.motion.x<=920 && event.motion.y>=883 &&event.motion.y<= 957)
                     {
                         menu=0;
                         first_window();
+                        break;
                     }
                 }
 
-                else if (menu==11)
-                {
-                    menu=ambulance_Rajshahi();
-                }
                 else if (menu==12)
                 {
-                    menu=ambulance_chittagong();
-                }
-                else if (menu==13)
-                {
-                    menu=ambulance_Sylhet();
-                }
-                else if (menu==14)
-                {
-                    menu=ambulance_Barisal();
-                }
-                else  if (menu==15)
-                {
-                    menu=ambulance_Khulna();
-                }
-                else if (menu==16)
-                {
-                    menu=ambulance_Rangpur();
-                }
-                else if (menu==17)
-                {
-                    menu=ambulance_Mymensingh();
+                    NO_Record_Found();
+                    if (event.motion.x>=1125 && event.motion.x<=1325 && event.motion.y>=861 && event.motion.y<=943)
+                    {
+                        menu=0;
+                        clear();
+                        input_symptoms="";
+                        first_window();
+                        break;
+                    }
                 }
 
+                //admin panel_login satrt
                 else if (menu==18)
                 {
                     
@@ -435,15 +534,18 @@ int main(int argc,char* args[])
                                 menu=19;
                                 username="";
                                 password="";
+                                pseudo_pass="";
                                 j=0;
                                 clear();
                                 admin_main_menu();
+                                m=0;
                             }
                             else 
                             {
                                 menu=23;
                                 username="";
                                 password="";
+                                pseudo_pass="";
                                 j=0;
                                 clear();
                                 wrong();
@@ -452,14 +554,68 @@ int main(int argc,char* args[])
                         }
                     
                 }
+                //admin_panel_login end
+
+                //Admin panel main menu
                 else if (menu==19)
                 {
                     clear();
                     admin_main_menu();
-                    if (event.motion.x>=121 && event.motion.x<=515 && event.motion.y>=172 && event.motion.y<=285)
+                    m=0;
+                    if (event.motion.x>=71 && event.motion.x<=365 && event.motion.y>=111 && event.motion.y<=210 )
                     {
                         menu=22;
                         if (m==0)
+                        {
+                            m=Specality_Function();
+                        }
+                        break;
+
+                    }
+
+                    else if (event.motion.x>=71 && event.motion.x<=365 && event.motion.y>=276 && event.motion.y<=372)
+                    {
+                        menu=11;
+                        if (m==0)
+                        {
+                            m=add_Ambulance_division_Function();
+                        }
+                        break;
+                    }
+                    else if (event.motion.x>=71 && event.motion.x<=365 && event.motion.y>=437 && event.motion.y<=532 )
+                    {
+                        menu=21;
+                        message_function();
+                        break;
+                    }
+                    else if (event.motion.x>=71 && event.motion.x<=365 && event.motion.y>=595 && event.motion.y<=692 )
+                    {
+                        menu=0;
+                        first_window();
+                        break;
+                    }
+                }
+
+
+                //Message start
+                else if (menu==21)
+                {
+                    message_function();
+                    if (event.motion.x>=1326&&event.motion.x<=1434&&event.motion.y>=913&&event.motion.y<=976)
+                    {
+                        menu=19;
+                        clear();
+                        admin_main_menu();
+                        break;
+                    }
+                }
+                //message end
+
+                //Add a doctor
+                else if (menu==22)
+                {
+
+                    if (m==0)
                         {
                             m=Specality_Function();
                             if (event.key.keysym.sym==SDLK_RETURN)
@@ -503,113 +659,84 @@ int main(int argc,char* args[])
                                 break;
                             }
                         }
-                        else if (m==4)printf("sdfsf");
-                        {
-                            add_phone_number_function();
-                            if (event.key.keysym.sym==SDLK_RETURN)
-                            {
-                                menu=19;
-                                append(5,const_cast<char*>(doctor.c_str()),const_cast<char*>(Specality.c_str()),const_cast<char*>(Hospital.c_str()),const_cast<char*>(phone_number.c_str()),const_cast<char*>(Doctor_time.c_str()));
-                                break;
-                            }
-                        }
-
-                    }
-                    else if (event.motion.x>=121 && event.motion.x<=515 && event.motion.y>=339 && event.motion.y<=455)
-                    {
-                        menu=21;
-                        message_function();
-                        break;
-                    }
-                    else if (event.motion.x>=121 && event.motion.x<=515 && event.motion.y>=512 && event.motion.y<=625)
-                    {
-                        menu=0;
-                        first_window();
-                        break;
-                    }
-                }
-
-                else if (menu==21)
-                {
-                    message_function();
-                    if (event.motion.x>=1326&&event.motion.x<=1434&&event.motion.y>=913&&event.motion.y<=976)
-                    {
-                        menu=19;
-                        admin_main_menu();
-                        break;
-                    }
-                }
-
-                //Add a doctor
-                else if (menu==22)
-                {
-
-                    if (m==0)
-                    {
-                        Specality_Function();
-                        if (event.key.keysym.sym==SDLK_RETURN)
-                            {
-                                m=1;
-                                menu=22;
-                                add_doctor_function();
-                                break;
-                            }
-                        
-                    }
-                    else if (m==1)
-                    {
-                        add_doctor_function();
-                        if (event.key.keysym.sym==SDLK_RETURN)
-                            {
-                                m=2;
-                                menu=22;
-                                add_doctor_time_function();
-                                break;
-                            }
-                    }
-                    else if (m==2)
-                        {
-                            add_doctor_time_function();
-                            if (event.key.keysym.sym==SDLK_RETURN)
-                            {
-                                m=3;
-                                menu=22;
-                                add_Hospital_function();
-                                break;
-                            }
-                        }
-                        else if (m==3)
-                        {
-                            add_Hospital_function();
-                            if (event.key.keysym.sym==SDLK_RETURN)
-                            {
-                                m=4;
-                                menu=22;
-                                add_phone_number_function();
-                                break;
-                            }
-                        }
                         else if (m==4)
                         {
                             add_phone_number_function();
+                            if (event.motion.x>=582 && event.motion.x<=697 && event.motion.y>=905 && event.motion.y<=966)
+                            {
+                                menu=24;
+                                clear();
+                                append(5,const_cast<char*>(doctor.c_str()),const_cast<char*>(Specality.c_str()),const_cast<char*>(Hospital.c_str()),const_cast<char*>(phone_number.c_str()),const_cast<char*>(Doctor_time.c_str()));
+                                strings_clear();
+                                add_a_doctor_Next();
+                                break;
+                            }
+                        
+                        }
+                        if (event.motion.x>=1278 && event.motion.x<= 1408 && event.motion.y>=904 && event.motion.y<=968)
+                        {
+                            menu=19;
+                            clear();
+                            strings_clear();
+                            admin_main_menu();
+                            break;
+                        }
+
+                    
+                }
+                //add a doctor end
+
+                //add a ambulance start
+                else if (menu==11)
+                {
+                    if (m==0)
+                        {
+                            m=add_Ambulance_division_Function();
                             if (event.key.keysym.sym==SDLK_RETURN)
                             {
-                                menu=19;
-                                append(5,const_cast<char*>(doctor.c_str()),const_cast<char*>(Specality.c_str()),const_cast<char*>(Hospital.c_str()),const_cast<char*>(phone_number.c_str()),const_cast<char*>(Doctor_time.c_str()));
+                                m=1;
+                                menu=11;
+                                add_Ambulance_name_Function();
                                 break;
                             }
                         }
-                    // if (event.motion.x>=583 && event.motion.x<=690 && event.motion.y>=901 && event.motion.y<=965 )
-                    // {
-
-                    // }
-                    // else if (event.motion.x>=1280 && event.motion.x<=1407 && event.motion.y>=901 && event.motion.y<=965 )
-                    // {
-                    //     menu=19;
-                    //     admin_main_menu();
-                    // }
-                    
+                        else if (m==1)
+                        {
+                            add_Ambulance_name_Function();
+                            if (event.key.keysym.sym==SDLK_RETURN)
+                            {
+                                m=2;
+                                menu=11;
+                                add_Ambulance_phone_Function();
+                                break;
+                            }
+                        }
+                        else if (m==2)
+                        {
+                            add_Ambulance_phone_Function();
+                            if (event.motion.x>=582 && event.motion.x<=697 && event.motion.y>=905 && event.motion.y<=966)
+                            {
+                                menu=24;
+                                Ambulance_append(const_cast<char*>(Division_add.c_str()),const_cast<char*>(amb_name.c_str()),const_cast<char*>(amb_phone.c_str()));
+                                str_clear();
+                                clear();
+                                add_a_doctor_Next();
+                                break;
+                            }
+                        
+                        }
+                    if (event.motion.x>=1278 && event.motion.x<= 1408 && event.motion.y>=904 && event.motion.y<=968)
+                        {
+                            menu=19;
+                            clear();
+                            str_clear();
+                            admin_main_menu();
+                            break;
+                        }
                 }
+                //add a doctor end
+
+                //login wrong
                 else if (menu==23) 
                     {
                         wrong();
@@ -618,15 +745,10 @@ int main(int argc,char* args[])
                         {
                             menu=18;
                             j=0;
-                            // if (j==0)
-                            // {
-                            //     j=login_username();
-                            // }
-                            
-                            // else if (j==1)
-                            // {
-                            //     j=login_password();
-                            // }
+                            if (j==0)
+                            {
+                                j=login_username();
+                            }
                             break;
 
                         }
@@ -637,10 +759,41 @@ int main(int argc,char* args[])
                             clear();
                             username="";
                             password="";
+                            pseudo_pass="";
                             admin_or_user_function();
                             break;
                         }
                     }
+
+                    //login wrong end
+
+                    //add a doctor next page 
+                else if (menu==24)
+                {
+                    add_a_doctor_Next();
+                    if (event.motion.x>=1326 && event.motion.x<=1437 && event.motion.y>=900 && event.motion.y<=973)
+                    {
+                        menu=19;
+                        admin_main_menu();
+                        break;
+                    }
+                }
+
+
+
+                //prevention Help
+                else if (menu==30)
+                {
+                    Help_CLICK();
+                    if (event.motion.x>=1327 && event.motion.x<=1435 && event.motion.y>=913 && event.motion.y<=973)
+                    {
+                        menu=7;
+                        i=0;
+                        prevention_page1(i);
+                        break;
+                    }
+                }
+
             }
         }
 
@@ -674,6 +827,42 @@ int main(int argc,char* args[])
         SDL_RenderCopy(gRenderer,phone_number_Texture,NULL,&phone_number_rect);
         SDL_RenderCopy(gRenderer,phone_number_add_Texture,NULL,&phone_number_add_rect);
 
+        SDL_RenderCopy(gRenderer,Specality_text_Texture,NULL,&Specality_text_rect);
+        SDL_RenderCopy(gRenderer,Specality_Show_Texture,NULL,&Specality_Show_Rect);
+
+        SDL_RenderCopy(gRenderer,Doctor_name_text_Texture,NULL,&Doctor_name_text_Rect);
+        SDL_RenderCopy(gRenderer,Doctor_name_Show_Texture,NULL,&Doctor_name_Show_Rect);
+
+        SDL_RenderCopy(gRenderer,Doctor_date_text_Texture,NULL,&Doctor_date_text_Rect);
+        SDL_RenderCopy(gRenderer,Doctor_date_Show_Texture,NULL,&Doctor_date_Show_Rect);
+
+        SDL_RenderCopy(gRenderer,Hospital_name_text_Texture,NULL,&Hospital_name_text_Rect);
+        SDL_RenderCopy(gRenderer,Hospital_name_Show_Texture,NULL,&Hospital_name_Show_Rect);
+
+        SDL_RenderCopy(gRenderer,phone_number_text_Texture,NULL,&phone_number_text_rect);
+        SDL_RenderCopy(gRenderer,phone_number_text_show_Texture,NULL,&phone_number_text_show_rect);
+
+        SDL_RenderCopy(gRenderer,Division_Texture,NULL,&Division_rect);
+        SDL_RenderCopy(gRenderer,Division_text_Texture,NULL,&Division_text_rect);
+
+        SDL_RenderCopy(gRenderer,amb_name_Texture,NULL,&amb_name_rect);
+        SDL_RenderCopy(gRenderer,amb_name_text_Texture,NULL,&amb_name_text_rect);
+
+        SDL_RenderCopy(gRenderer,amb_phone_Texture,NULL,&amb_phone_rect);
+        SDL_RenderCopy(gRenderer,amb_phone_text_Texture,NULL,&amb_phone_text_rect);
+
+        SDL_RenderCopy(gRenderer,Division_input_texture,NULL,&Division_input_rect);
+        SDL_RenderCopy(gRenderer,Division_input_text_texture,NULL,&Division_input_text_rect);
+
+        SDL_RenderCopy(gRenderer,Division_show_Texture,NULL,&Division_show_rect);
+        SDL_RenderCopy(gRenderer,Division_show_text_Texture,NULL,&Division_show_text_rect);
+
+        SDL_RenderCopy(gRenderer,amb_name_show_Texture,NULL,&amb_name_show_rect);
+        SDL_RenderCopy(gRenderer,amb_name_show_text_Texture,NULL,&amb_name_show_text_rect);
+
+        SDL_RenderCopy(gRenderer,amb_phone_show_Texture,NULL,&amb_phone_show_rect);
+        SDL_RenderCopy(gRenderer,amb_phone_show_text_Texture,NULL,&amb_phone_show_text_rect);
+
         SDL_RenderCopy(gRenderer,message_texture,NULL,&message_rect);
         
         SDL_RenderPresent(gRenderer);
@@ -683,8 +872,4 @@ int main(int argc,char* args[])
     close();
 }
 
-
-
-
-                //SDL_RenderClear(gRenderer);
             

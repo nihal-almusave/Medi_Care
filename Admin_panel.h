@@ -150,7 +150,7 @@ int login_password()
 
 bool admin_main_menu()
 {
-    gTexture=loadedTexture("photos/Admin_Work.jpg");
+    gTexture=loadedTexture("photos/Admin_main_menu.jpg");
 
     return true;
 }
