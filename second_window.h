@@ -166,11 +166,11 @@ int Show_information()
     {
         arr[c]=0;
     }
-    if(strstr(input_symptoms.c_str(),"01")||strstr(input_symptoms.c_str(),"1")||strstr(input_symptoms.c_str(),"02")||strstr(input_symptoms.c_str(),"2")||strstr(input_symptoms.c_str(),"03")||strstr(input_symptoms.c_str(),"3")||strstr(input_symptoms.c_str(),"04")||strstr(input_symptoms.c_str(),"4")||strstr(input_symptoms.c_str(),"05")||strstr(input_symptoms.c_str(),"5"))
+    if(strstr(input_symptoms.c_str(),"01")||strstr(input_symptoms.c_str(),"02")||strstr(input_symptoms.c_str(),"03")||strstr(input_symptoms.c_str(),"04")||strstr(input_symptoms.c_str(),"05"))
     {
         arr[0]=1;
     }
-    if(strstr(input_symptoms.c_str(),"06")||strstr(input_symptoms.c_str(),"6")||strstr(input_symptoms.c_str(),"07")||strstr(input_symptoms.c_str(),"7")||strstr(input_symptoms.c_str(),"08")||strstr(input_symptoms.c_str(),"8")||strstr(input_symptoms.c_str(),"09")||strstr(input_symptoms.c_str(),"9")||strstr(input_symptoms.c_str(),"10"))
+    if(strstr(input_symptoms.c_str(),"06")||strstr(input_symptoms.c_str(),"07")||strstr(input_symptoms.c_str(),"08")||strstr(input_symptoms.c_str(),"09")||strstr(input_symptoms.c_str(),"10"))
     {
         arr[1]=1;
     }
